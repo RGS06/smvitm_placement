@@ -49,16 +49,16 @@ const Footer = () => {
           <div className="footer-social">
             <h3>Connect With Us</h3>
             <div className="social-icons">
-              <a href="https://www.linkedin.com/company/shri-madhwa-vadiraja-institute-of-technology-and-management/" className="social-icon">
+              <a href="https://www.linkedin.com/company/shri-madhwa-vadiraja-institute-of-technology-and-management/" className="social-icon" aria-label="LinkedIn">
                 <FaLinkedin />
               </a>
-              <a href="https://www.instagram.com/smvitm.sode/" className="social-icon">
+              <a href="https://www.instagram.com/smvitm.sode/" className="social-icon" aria-label="Instagram">
                 <FaInstagram />
               </a>
-              <a href="https://www.facebook.com/officialsmvitm" className="social-icon">
+              <a href="https://www.facebook.com/officialsmvitm" className="social-icon" aria-label="Facebook">
                 <FaFacebook />
               </a>
-              <a href="https://www.youtube.com/SMVITMBANTAKAL" className="social-icon">
+              <a href="https://www.youtube.com/SMVITMBANTAKAL" className="social-icon" aria-label="YouTube">
                 <FaYoutube />
               </a>
             </div>
@@ -67,6 +67,7 @@ const Footer = () => {
 
         <div className="footer-bottom">
           <p>&copy; {currentYear} Training & Placement Cell. All Rights Reserved.</p>
+          <p className="footer-credit">Designed with ❤️ by Placement Cell Team</p>
         </div>
       </div>
     </footer>

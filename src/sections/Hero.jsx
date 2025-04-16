@@ -8,22 +8,44 @@ const images = [Image2025, Infosys, Kyndryl];
 
 const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
     }, 5000); // Change every 5 seconds
 
-    return () => clearInterval(interval); // Clean up interval on component unmount
+    window.addEventListener('resize', handleResize);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (
     <section
       className="hero"
       id="home"
-      style={{ backgroundImage: `url(${images[currentImage]})` }} // Dynamic background image
+      style={{ 
+        backgroundImage: `url(${images[currentImage]})`,
+        height: isMobile ? '60vh' : '70vh'
+      }}
     >
-      {/* Content of your Hero section */}
+      <div className="hero-overlay"></div>
+      <div className="hero-content">
+        <h1>Training & Placement Cell</h1>
+        <p className="hero-subtitle">
+          Bridging the gap between academia and industry through comprehensive training and placement programs
+        </p>
+        <div className="hero-buttons">
+          <a href="#contact" className="btn">Contact Us</a>
+          <a href="#about" className="btn btn-outline">Learn More</a>
+        </div>
+      </div>
     </section>
   );
 };
