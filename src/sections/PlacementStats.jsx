@@ -4,25 +4,31 @@ import './PlacementStats.css';
 
 const PlacementStats = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
     const handleScroll = () => {
       const element = document.getElementById('stats');
       if (element) {
         const position = element.getBoundingClientRect();
-
-        // Check if element is in viewport
         if(position.top < window.innerHeight && position.bottom >= 0) {
           setIsVisible(true);
         }
       }
     };
 
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
     window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
     handleScroll(); // Check on initial load
+    handleResize(); // Check on initial load
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -68,13 +74,13 @@ const PlacementStats = () => {
         <div className="stats-container">
           {stats.map(stat => (
             <div className="stat-card" key={stat.id}>
-              <div className="stat-icon">{stat.icon}</div>
+              <div className="stat-icon" role="img" aria-label={stat.title}>{stat.icon}</div>
               <h3 className="stat-title">{stat.title}</h3>
               <div className="stat-value">
                 {isVisible ? (
                   <CountUp
                     end={stat.value}
-                    duration={2.5}
+                    duration={isMobile ? 1.5 : 2.5} // Faster animation on mobile
                     decimals={stat.value % 1 !== 0 ? 1 : 0}
                     suffix={stat.suffix}
                   />

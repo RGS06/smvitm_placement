@@ -23,7 +23,7 @@ const Team = () => {
       email: 'mithanthaya.office@sode-edu.in',
       phone: '+91 9916943300',
       isAPO: true,
-      image: '/SHRIKANTH-PLACEMENT.jpg' // Example image path for APO
+      image: '/SHRIKANTH-PLACEMENT.jpg'
     },
     {
       id: 2,
@@ -85,8 +85,8 @@ const Team = () => {
                   <div className="tpo-info">
                     <h3>{tpo.name}</h3>
                     <p className="tpo-position">{tpo.position}</p>
-                    <p><strong>Email:</strong> {tpo.email}</p>
-                    <p><strong>Phone:</strong> {tpo.phone}</p>
+                    <p className="tpo-contact"><strong>Email:</strong> {tpo.email}</p>
+                    <p className="tpo-contact"><strong>Phone:</strong> {tpo.phone}</p>
                   </div>
                 </div>
                 <div className="tpo-message">
@@ -108,8 +108,8 @@ const Team = () => {
                   <div className="tpo-info">
                     <h3>{apo.name}</h3>
                     <p className="tpo-position">{apo.position}</p>
-                    <p><strong>Email:</strong> {apo.email}</p>
-                    <p><strong>Phone:</strong> {apo.phone}</p>
+                    <p className="tpo-contact"><strong>Email:</strong> {apo.email}</p>
+                    <p className="tpo-contact"><strong>Phone:</strong> {apo.phone}</p>
                   </div>
                 </div>
               </div>

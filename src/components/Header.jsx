@@ -1,16 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaBars, FaTimes, FaGraduationCap } from 'react-icons/fa';
 import './Header.css';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  // Close menu when clicking on a link
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
 
+  // Handle scroll effect for header
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="header">
+    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="container">
         <div className="header-content">
           <div className="logo">
@@ -20,20 +36,24 @@ const Header = () => {
             </a>
           </div>
 
-          <div className="mobile-toggle" onClick={toggleMenu}>
+          <button 
+            className="mobile-toggle" 
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle navigation menu"
+          >
             {isMenuOpen ? <FaTimes /> : <FaBars />}
-          </div>
+          </button>
 
           <nav className={`navigation ${isMenuOpen ? 'active' : ''}`}>
             <ul>
-              <li><a href="#about">About</a></li>
-              <li><a href="#stats">Placements</a></li>
-              <li><a href="#recruiters">Recruiters</a></li>
-              <li><a href="#reports">Reports</a></li>
-              <li><a href="#gallery">Gallery</a></li>
-              <li><a href="#testimonials">Testimonials</a></li>
-              <li><a href="#team">Team</a></li>
-              <li><a href="#contact" className="btn">Contact Us</a></li>
+              <li><a href="#about" onClick={closeMenu}>About</a></li>
+              <li><a href="#stats" onClick={closeMenu}>Placements</a></li>
+              <li><a href="#recruiters" onClick={closeMenu}>Recruiters</a></li>
+              <li><a href="#reports" onClick={closeMenu}>Reports</a></li>
+              <li><a href="#gallery" onClick={closeMenu}>Gallery</a></li>
+              <li><a href="#testimonials" onClick={closeMenu}>Testimonials</a></li>
+              <li><a href="#team" onClick={closeMenu}>Team</a></li>
+              <li><a href="#contact" className="btn" onClick={closeMenu}>Contact Us</a></li>
             </ul>
           </nav>
         </div>
