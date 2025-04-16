@@ -4,6 +4,7 @@ import './Gallery.css';
 
 const Gallery = () => {
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [activeFilter, setActiveFilter] = useState('All');
 
   // Sample data for placed students
   const students = [
@@ -13,7 +14,7 @@ const Gallery = () => {
       company: 'Google',
       package: '32 LPA',
       batch: '2023',
-      department: 'Computer Science',
+      department: 'CSE',
       color: '#4285F4'
     },
     {
@@ -22,7 +23,7 @@ const Gallery = () => {
       company: 'Microsoft',
       package: '28 LPA',
       batch: '2023',
-      department: 'Information Technology',
+      department: 'AI&DS',
       color: '#00A4EF'
     },
     {
@@ -31,7 +32,7 @@ const Gallery = () => {
       company: 'Amazon',
       package: '25 LPA',
       batch: '2023',
-      department: 'Computer Science',
+      department: 'CSE',
       color: '#FF9900'
     },
     {
@@ -40,7 +41,7 @@ const Gallery = () => {
       company: 'TCS',
       package: '12 LPA',
       batch: '2023',
-      department: 'Electronics',
+      department: 'ECE',
       color: '#0066CC'
     },
     {
@@ -49,7 +50,7 @@ const Gallery = () => {
       company: 'Infosys',
       package: '11 LPA',
       batch: '2023',
-      department: 'Information Technology',
+      department: 'AIML',
       color: '#2AD2C9'
     },
     {
@@ -58,7 +59,7 @@ const Gallery = () => {
       company: 'Wipro',
       package: '10 LPA',
       batch: '2023',
-      department: 'Mechanical',
+      department: 'ME',
       color: '#614AE4'
     },
     {
@@ -67,7 +68,7 @@ const Gallery = () => {
       company: 'Accenture',
       package: '9.5 LPA',
       batch: '2023',
-      department: 'Electrical',
+      department: 'ECE',
       color: '#A100FF'
     },
     {
@@ -76,10 +77,13 @@ const Gallery = () => {
       company: 'Deloitte',
       package: '14 LPA',
       batch: '2023',
-      department: 'Civil',
+      department: 'CV',
       color: '#86BC25'
     }
   ];
+
+  // Get unique departments for filter
+  const departments = ['All', 'CSE', 'AIML', 'AI&DS', 'CV', 'ECE', 'ME'];
 
   const openModal = (student) => {
     setSelectedStudent(student);
@@ -89,16 +93,34 @@ const Gallery = () => {
     setSelectedStudent(null);
   };
 
+  // Filter students based on active filter
+  const filteredStudents = activeFilter === 'All'
+    ? students
+    : students.filter(student => student.department === activeFilter);
+
   return (
     <section className="gallery section" id="gallery">
       <div className="container">
         <h2 className="section-title">Our Placed Students</h2>
         <p className="section-description">
+          <br></br>
           Meet some of our successful graduates who secured excellent opportunities through our placement cell.
         </p>
 
+        <div className="department-filter">
+          {departments.map(dept => (
+            <button
+              key={dept}
+              className={`filter-btn ${activeFilter === dept ? 'active' : ''}`}
+              onClick={() => setActiveFilter(dept)}
+            >
+              {dept}
+            </button>
+          ))}
+        </div>
+
         <div className="gallery-grid">
-          {students.map(student => (
+          {filteredStudents.map(student => (
             <div className="student-card" key={student.id} onClick={() => openModal(student)}>
               <div className="student-image" style={{ backgroundColor: student.color }}>
                 <FaUser className="user-icon" />
@@ -106,10 +128,17 @@ const Gallery = () => {
               <div className="student-info">
                 <h3>{student.name}</h3>
                 <p className="company">{student.company}</p>
+                <p className="department">{student.department}</p>
               </div>
             </div>
           ))}
         </div>
+
+        {filteredStudents.length === 0 && (
+          <div className="no-results">
+            <p>No students found for this department.</p>
+          </div>
+        )}
 
         {selectedStudent && (
           <div className="modal-overlay" onClick={closeModal}>

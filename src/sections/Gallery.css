@@ -2,6 +2,47 @@
   background-color: #fff;
 }
 
+/* Department Filter Styles */
+.department-filter {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin: 2rem 0;
+}
+
+.filter-btn {
+  padding: 0.6rem 1.5rem;
+  border: 2px solid var(--primary-color, #4285F4);
+  background-color: transparent;
+  border-radius: 30px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  color: var(--text-color, #333);
+}
+
+.filter-btn:hover {
+  background-color: var(--primary-color, #4285F4);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background-color: var(--primary-color, #4285F4);
+  color: white;
+  box-shadow: 0 4px 10px rgba(66, 133, 244, 0.3);
+}
+
+.no-results {
+  text-align: center;
+  padding: 3rem 0;
+  font-size: 1.2rem;
+  color: #777;
+}
+
+/* Existing styles continue below */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -49,12 +90,23 @@
 .student-info h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
-  color: var(--primary-color);
+  color: var(--primary-color, #4285F4);
 }
 
 .student-info .company {
-  color: var(--secondary-color);
+  color: var(--secondary-color, #333);
   font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.student-info .department {
+  color: #666;
+  font-size: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  display: inline-block;
+  margin-top: 0.5rem;
 }
 
 /* Modal styles */
@@ -100,7 +152,7 @@
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: var(--primary-color);
+  color: var(--primary-color, #4285F4);
   z-index: 10;
 }
 
@@ -132,7 +184,7 @@
 .modal-details h3 {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: var(--primary-color);
+  color: var(--primary-color, #4285F4);
 }
 
 .modal-details p {
@@ -141,13 +193,22 @@
 }
 
 .modal-details .company {
-  color: var(--secondary-color);
+  color: var(--secondary-color, #333);
   font-size: 1.2rem;
 }
 
 @media (max-width: 1024px) {
   .gallery-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .department-filter {
+    gap: 0.6rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -164,6 +225,15 @@
   .modal-image {
     height: 300px;
   }
+
+  .department-filter {
+    gap: 0.4rem;
+  }
+
+  .filter-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -173,5 +243,19 @@
 
   .student-image {
     height: 300px;
+  }
+
+  .department-filter {
+    flex-direction: row;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    justify-content: flex-start;
+    gap: 0.3rem;
+  }
+
+  .filter-btn {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
   }
 }

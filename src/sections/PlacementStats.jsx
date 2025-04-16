@@ -66,7 +66,7 @@ const PlacementStats = () => {
   return (
     <section className="stats section" id="stats">
       <div className="container">
-        <h2 className="section-title">Placement Statistics</h2>
+        <h2 className="section-title" style={{ marginBottom: "2rem" }}>Placement Statistics</h2>
         <p className="section-description">
           Our placement records demonstrate our commitment to excellence and industry relevance.
         </p>

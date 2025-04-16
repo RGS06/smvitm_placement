@@ -37,13 +37,11 @@ const Hero = () => {
     >
       <div className="hero-overlay"></div>
       <div className="hero-content">
-        <h1>Training & Placement Cell</h1>
+       
         <p className="hero-subtitle">
-          Bridging the gap between academia and industry through comprehensive training and placement programs
         </p>
         <div className="hero-buttons">
-          <a href="#contact" className="btn">Contact Us</a>
-          <a href="#about" className="btn btn-outline">Learn More</a>
+          
         </div>
       </div>
     </section>

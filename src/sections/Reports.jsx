@@ -104,7 +104,7 @@ const Reports = () => {
   return (
     <section className="reports section" id="reports">
       <div className="container">
-        <h2 className="section-title">Placement Reports & Analytics</h2>
+        <h2 className="section-title" style={{ marginBottom: "2rem" }}>Placement Reports & Analytics</h2>
         <p className="section-description">
           Visualizing our placement journey through comprehensive analytics and reports.
         </p>

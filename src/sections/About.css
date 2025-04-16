@@ -195,3 +195,6 @@
     font-size: 0.9rem;
   }
 }
+.section-title {
+  margin-bottom: 2rem; /* or any value you prefer */
+}

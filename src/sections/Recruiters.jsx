@@ -18,7 +18,7 @@ const Recruiters = () => {
   return (
     <section className="recruiters section" id="recruiters">
       <div className="container">
-        <h2 className="section-title">Our Top Recruiters</h2>
+        <h2 className="section-title" style={{ marginBottom: "2rem" }}>Our Top Recruiters</h2>
         <p className="section-description">
           We are proud to partner with leading organizations that recognize the talent and potential of our students.
         </p>

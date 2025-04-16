@@ -4,12 +4,12 @@ const About = () => {
   return (
     <section className="about section" id="about">
       <div className="container">
-        <h2 className="section-title">About Training & Placement Cell</h2>
+        <h2 className="section-title" style={{ marginBottom: "2rem" }}>About Training & Placement Cell</h2>
 
         <div className="about-content">
           <div className="about-image">
             <img 
-              src="src/images/tpc.png" 
+              src="/tpc.png" 
               alt="Placement Office" 
               loading="lazy" // Added for performance
             />

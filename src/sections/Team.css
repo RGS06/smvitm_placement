@@ -1,47 +1,21 @@
-:root {
-  --primary-color: #7B1436;
-  --secondary-color: #C59048;
-  --text-dark: #333;
-  --text-light: #fff;
-  --bg-light: #fff;
-  --transition: all 0.3s ease;
-}
-
-/* Base Styles */
 .team {
-  background-color: var(--bg-light);
-  padding: 4rem 0;
+  background-color: #fff;
 }
 
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.section-title {
+/* Section Heading */
+.team-subheading {
   text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  margin: 3rem 0 2rem;
   color: var(--primary-color);
-}
-
-.section-description {
-  text-align: center;
-  color: var(--text-dark);
-  font-size: 1.1rem;
-  max-width: 800px;
-  margin: 0 auto 3rem;
-  line-height: 1.6;
+  font-size: 1.8rem;
 }
 
 /* TPO & APO Container */
 .tpo-ap-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 2rem;
+  justify-content: center;
   margin-bottom: 3rem;
 }
 
@@ -52,14 +26,22 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   width: 100%;
-  max-width: 800px;
+  max-width: 700px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
 }
 
+/* Shared Layout for TPO Profile */
 .tpo-details {
   display: flex;
-  padding: 2rem;
-  gap: 2rem;
   align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: nowrap;
+  overflow: hidden;
 }
 
 .tpo-image {
@@ -70,75 +52,92 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  font-size: 6rem;
   flex-shrink: 0;
-  overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.tpo-user-icon {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .tpo-info {
   flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 
 .tpo-info h3 {
+  margin: 0;
   font-size: 1.5rem;
   color: var(--primary-color);
-  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tpo-position {
-  color: var(--secondary-color);
+  font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+  color: var(--secondary-color);
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.tpo-contact {
+.tpo-contact p {
   margin-bottom: 0.5rem;
-  color: var(--text-dark);
 }
 
+/* Message Section */
 .tpo-message {
   padding: 2rem;
-  background-color: rgba(123, 20, 54, 0.05);
 }
 
 .tpo-message h3 {
   color: var(--primary-color);
   margin-bottom: 1rem;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: #444;
+  text-align: justify;
 }
 
 .tpo-message p {
   line-height: 1.8;
-  color: var(--text-dark);
+  color: #444;
 }
 
-/* Department Coordinators */
-.team-subheading {
-  text-align: center;
-  margin: 3rem 0 2rem;
-  color: var(--primary-color);
-  font-size: 1.8rem;
+/* Swiper for Department Coordinators */
+.team-swiper {
+  padding: 2rem 0;
 }
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
 }
 
+.swiper-pagination-bullet {
+  background: #7B1436;
+  opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+  background: #C59048;
+  opacity: 1;
+}
+
+/* Individual Team Member Card */
 .team-card {
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  transition: var(--transition);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
 }
 
 .team-card:hover {
@@ -155,14 +154,13 @@
 }
 
 .team-user-icon {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: var(--transition);
+  font-size: 5rem;
+  color: rgba(255, 255, 255, 0.8);
+  transition: transform 0.3s ease;
 }
 
 .team-card:hover .team-user-icon {
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 .team-info {
@@ -185,106 +183,40 @@
 .team-department {
   font-style: italic;
   margin-bottom: 0.5rem;
-  color: var(--text-dark);
 }
 
 .team-email {
   font-size: 0.9rem;
   color: #666;
-  word-break: break-word;
 }
 
-/* Responsive Styles */
+/* Responsive Layouts */
 @media (max-width: 1024px) {
-  .tpo-profile {
-    max-width: 100%;
-  }
-  
-  .tpo-details {
-    padding: 1.5rem;
-  }
-  
-  .tpo-image {
-    width: 150px;
-    height: 180px;
+  .tpo-ap-container {
+    flex-direction: column;
+    gap: 2rem;
   }
 }
 
 @media (max-width: 768px) {
-  .team {
-    padding: 3rem 0;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-  }
-  
-  .section-description {
-    font-size: 1rem;
-    padding: 0 1rem;
-  }
-  
   .tpo-details {
     flex-direction: column;
     text-align: center;
-    padding: 1.5rem;
   }
-  
-  .tpo-image {
-    margin-bottom: 1.5rem;
-    width: 120px;
-    height: 150px;
-  }
-  
-  .team-subheading {
-    font-size: 1.5rem;
-    margin: 2rem 0 1.5rem;
-  }
-  
-  .team-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-  }
-}
 
-@media (max-width: 480px) {
-  .section-title {
-    font-size: 1.8rem;
-  }
-  
-  .tpo-profile {
-    border-radius: 8px;
-  }
-  
-  .tpo-message {
-    padding: 1.5rem;
-  }
-  
-  .team-grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
+  .tpo-image {
     margin: 0 auto;
   }
-  
-  .team-image {
-    height: 220px;
-  }
 }
-
-@media (max-width: 360px) {
-  .section-title {
-    font-size: 1.6rem;
-  }
-  
-  .tpo-info h3 {
-    font-size: 1.3rem;
-  }
-  
-  .tpo-position {
-    font-size: 1rem;
-  }
-  
-  .team-info h3 {
-    font-size: 1.1rem;
-  }
+.tpo-ap-slider,
+.team-grid-slider {
+  margin-top: 2rem;
+}
+.swiper-pagination-bullet {
+  background: var(--primary-color);
+}
+.tpo-message-card {
+  background-color: #fff;
+  border-left: 5px solid var(--primary-color);
+  text-align: justify;
 }
