@@ -1,0 +1,236 @@
+.team {
+  background-color: #fff;
+}
+
+/* Section Heading */
+.team-subheading {
+  text-align: center;
+  margin: 3rem 0 2rem;
+  color: var(--primary-color);
+  font-size: 1.8rem;
+}
+
+/* TPO & APO Container */
+.tpo-ap-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+/* TPO Profile Card */
+.tpo-profile {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%; /* Full width on large screens */
+  max-width: 700px; /* Increased max-width to give more space */
+  min-width: 320px; /* Set a minimum width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+/* Responsive Layout for Smaller Screens */
+@media (max-width: 768px) {
+  .tpo-ap-container {
+    flex-direction: column; /* Stack the profiles vertically */
+    gap: 1rem;
+  }
+
+  .tpo-profile {
+    width: 100%; /* Full width on small screens */
+    min-width: 280px; /* Prevent cards from becoming too small */
+  }
+
+  .tpo-details {
+    flex-direction: column; /* Stack items vertically */
+    text-align: center;
+  }
+
+  .tpo-image {
+    margin: 0 auto;
+  }
+}
+
+/* Shared Layout for TPO Profile */
+.tpo-details {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: nowrap; /* Prevent text from wrapping into new rows */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.tpo-image {
+  width: 180px;
+  height: 220px;
+  border-radius: 10px;
+  background-color: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 6rem;
+  flex-shrink: 0; /* Prevent shrinking on small screens */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Info Section for TPO Profile */
+.tpo-info {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden; /* Prevent overflow */
+  word-wrap: break-word; /* Ensure long words break to fit the container */
+}
+
+.tpo-info h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  white-space: nowrap; /* Prevent wrapping of names */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis if text overflows */
+}
+
+.tpo-position {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--secondary-color);
+  display: inline-block;
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis */
+}
+
+/* Contact Info */
+.tpo-contact p {
+  margin-bottom: 0.5rem;
+}
+
+/* Message Section */
+.tpo-message {
+  padding: 2rem;
+}
+
+.tpo-message h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: #444;
+  text-align: justify;
+}
+
+.tpo-message p {
+  line-height: 1.8;
+  color: #444;
+}
+
+/* Responsive Grid for Profile Cards */
+@media (max-width: 1024px) {
+  .tpo-ap-container {
+    flex-direction: column; /* Stack vertically for medium screens */
+    gap: 2rem;
+  }
+}
+
+
+
+/* Team Members Grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+/* Individual Team Member Card */
+.team-card {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.team-image {
+  height: 250px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.team-user-icon {
+  font-size: 5rem;
+  color: rgba(255, 255, 255, 0.8);
+  transition: transform 0.3s ease;
+}
+
+.team-card:hover .team-user-icon {
+  transform: scale(1.1);
+}
+
+.team-info {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.team-info h3 {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+}
+
+.team-position {
+  color: var(--secondary-color);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.team-department {
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.team-email {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Responsive Layouts */
+@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .tpo-details {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .tpo-image {
+    margin: 0 auto;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}
