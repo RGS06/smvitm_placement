@@ -3,216 +3,126 @@
 #testimonials {
   background: linear-gradient(135deg, #3e0a1e, #250612);
   color: #fff;
-  padding: 6rem 1rem;
-  position: relative;
-  overflow: hidden;
-}
-
-#testimonials::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, #c59048, #ffd700, #c59048);
+  padding: 5rem 1rem;
 }
 
 #testimonials .container {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
-  position: relative;
-  padding: 0 2rem;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 3rem;
   position: relative;
 }
 
 .section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  position: relative;
-  display: inline-block;
-}
-
-.section-title::after {
-  content: "";
-  position: absolute;
-  bottom: -8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, #c59048, #ffd700);
-  border-radius: 3px;
+  font-size: 2.25rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 .section-subtitle {
+  text-align: center;
   color: rgba(255, 255, 255, 0.8);
   font-size: 1.125rem;
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.6;
+  margin-bottom: 2.5rem;
 }
 
 /* Slider */
 .slider-container {
   position: relative;
   overflow: hidden;
-  padding: 0 3rem;
 }
 
 .slider-track {
   display: flex;
-  transition: transform 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: transform 0.5s ease-in-out;
   width: 100%;
 }
 
 .testimonial-slide {
-  flex: 0 0 100%;
+  flex-shrink: 0;
+  width: 100%;
   padding: 0 1rem;
 }
 
 .testimonial-card {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  border-radius: 1.25rem;
-  padding: 3rem 2rem;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   position: relative;
-  overflow: hidden;
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.testimonial-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, #c59048, #ffd700);
 }
 
 .quote-icon {
   position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  font-size: 3rem;
-  color: rgba(197, 144, 72, 0.1);
+  top: 1rem;
+  left: 1rem;
+  color: rgba(255, 255, 255, 0.1);
 }
 
 .testimonial-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
-  position: relative;
-  z-index: 2;
+  gap: 1.5rem;
 }
-
 .testimonial-img {
-  width: 160px;
+  width: 160px;   /* Increased from default */
   height: 160px;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid rgba(197, 144, 72, 0.3);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  border: 4px solid rgba(255, 215, 0, 0.2); /* subtle golden border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   flex-shrink: 0;
-  transition: transform 0.3s ease, border-color 0.3s ease;
-}
-
-.testimonial-img:hover {
-  transform: scale(1.05);
-  border-color: rgba(197, 144, 72, 0.6);
 }
 
 .testimonial-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
 }
 
-.testimonial-img:hover img {
-  transform: scale(1.1);
-}
 
 .testimonial-text {
   text-align: center;
-  flex: 1;
 }
 
 .testimonial-text .quote {
   font-style: italic;
-  font-size: 1.25rem;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-  position: relative;
-}
-
-.testimonial-text .quote::before,
-.testimonial-text .quote::after {
-  content: '"';
-  color: rgba(197, 144, 72, 0.5);
-  font-size: 1.5em;
-  line-height: 0;
-}
-
-.testimonial-text .quote::before {
-  margin-right: 5px;
-  vertical-align: -0.4em;
-}
-
-.testimonial-text .quote::after {
-  margin-left: 5px;
-  vertical-align: -0.4em;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
 }
 
 .testimonial-text h4 {
-  font-size: 1.375rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: bold;
   margin-bottom: 0.25rem;
-  color: #fff;
 }
 
 .testimonial-text .position {
   color: #c59048;
   font-weight: 500;
-  font-size: 1rem;
 }
 
 /* Dots */
 .dots {
   display: flex;
   justify-content: center;
-  gap: 0.75rem;
-  margin-top: 2.5rem;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
 }
 
 .dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.2);
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.3);
   cursor: pointer;
-  transition: all 0.3s ease;
-  border: 2px solid transparent;
-}
-
-.dot:hover {
-  background-color: rgba(197, 144, 72, 0.5);
+  transition: background-color 0.3s ease;
 }
 
 .dot.active {
   background-color: #c59048;
-  transform: scale(1.2);
-  border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Nav Buttons */
@@ -223,71 +133,35 @@
   background: rgba(255, 255, 255, 0.1);
   border: none;
   color: #fff;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  padding: 0.75rem;
+  border-radius: 999px;
   backdrop-filter: blur(4px);
   cursor: pointer;
   z-index: 10;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
 }
 
 .nav-btn:hover {
-  background: rgba(197, 144, 72, 0.8);
   transform: translateY(-50%) scale(1.1);
 }
 
 .nav-btn.left {
-  left: 0;
+  left: 0.5rem;
 }
 
 .nav-btn.right {
-  right: 0;
-}
-
-.nav-btn svg {
-  width: 24px;
-  height: 24px;
+  right: 0.5rem;
 }
 
 /* Responsive */
 @media (min-width: 768px) {
   .testimonial-content {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     text-align: left;
-    gap: 3rem;
   }
 
   .testimonial-text {
     text-align: left;
-  }
-  
-  .slider-container {
-    padding: 0 5rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .testimonial-card {
-    padding: 2rem 1.5rem;
-  }
-  
-  .testimonial-img {
-    width: 120px;
-    height: 120px;
-  }
-  
-  .testimonial-text .quote {
-    font-size: 1.1rem;
-  }
-  
-  .nav-btn {
-    width: 40px;
-    height: 40px;
   }
 }
