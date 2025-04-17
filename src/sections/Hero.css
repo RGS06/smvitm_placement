@@ -1,3 +1,12 @@
+/* Main container for both hero banner and news */
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+/* Hero Banner Styles */
 .hero {
   position: relative;
   height: 70vh; /* Default height for desktop */
@@ -8,13 +17,40 @@
   color: #fff;
   overflow: hidden;
   padding-top: 80px; /* For fixed header */
-
-  /* Image slider compatibility */
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
   background-color: #000;
-  transition: background-image 1s ease-in-out;
+}
+
+/* Slides container */
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-slides {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.hero-slide {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222; /* Dark background for better contrast */
+}
+
+.hero-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* This ensures the image is fully visible */
+  display: block;
 }
 
 .hero-overlay {
@@ -25,6 +61,65 @@
   height: 100%;
   background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
   z-index: 1;
+  pointer-events: none; /* Ensures clicks go through to the slider */
+}
+
+/* Navigation buttons */
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  z-index: 3;
+}
+
+.slider-nav:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.slider-nav.prev {
+  left: 20px;
+}
+
+.slider-nav.next {
+  right: 20px;
+}
+
+/* Dots navigation */
+.slider-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  z-index: 3;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: white;
 }
 
 .hero-content {
@@ -34,6 +129,12 @@
   max-width: 800px;
   text-align: center;
   padding: 2rem;
+  pointer-events: none; /* Ensures clicks go through to the slider */
+}
+
+.hero-content button,
+.hero-content a {
+  pointer-events: auto; /* Re-enable clicks on interactive elements */
 }
 
 .hero h1 {
@@ -78,26 +179,245 @@
   cursor: pointer;
 }
 
-.hero .btn {
-  background-color: #7B1436;
-  color: #fff;
-}
-
-.hero .btn:hover {
-  background-color: #C59048;
-  transform: translateY(-2px);
-}
-
-.hero .btn-outline {
-  border: 2px solid #fff;
-  background-color: transparent;
-  color: #fff;
-}
-
-.hero .btn-outline:hover {
+/* ======= ENHANCED NEWS SECTION STYLES ======= */
+.news-container {
+  width: 100%;
   background-color: #fff;
-  color: #7B1436;
+  border-top: 3px solid #7B1436; /* Maroon color from original design */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Explicitly set color for news header and elements */
+.news-header {
+  background: linear-gradient(135deg, #7B1436 0%, #9b2347 100%);
+  color: white !important; /* Explicitly set text color with !important */
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(123, 20, 54, 0.2);
+  z-index: 2;
+}
+
+.news-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.news-header h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  color: white !important; /* Explicitly set to white with !important */
+}
+
+/* Pulsing NEW indicator */
+.news-header .new-indicator {
+  background-color: #ff4757;
+  color: white !important;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  margin-left: 12px;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.view-all-link {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.view-all-link:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.view-all-link::after {
+  content: '→';
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.view-all-link:hover::after {
+  transform: translateX(4px);
+}
+
+/* News scroll container with gradient fade effect */
+.news-scroll-container {
+  height: 250px;
+  overflow: hidden;
+  position: relative;
+  background-color: #fafafa;
+}
+
+.news-scroll-container::before,
+.news-scroll-container::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 40px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.news-scroll-container::before {
+  top: 0;
+  background: linear-gradient(to bottom, rgba(250, 250, 250, 1) 0%, rgba(250, 250, 250, 0) 100%);
+}
+
+.news-scroll-container::after {
+  bottom: 0;
+  background: linear-gradient(to top, rgba(250, 250, 250, 1) 0%, rgba(250, 250, 250, 0) 100%);
+}
+
+.news-ticker {
+  display: flex;
+  flex-direction: column;
+  animation: scroll 30s linear infinite;
+  padding: 10px 0;
+}
+
+.news-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Enhanced news items */
+.news-item {
+  display: flex;
+  padding: 14px 24px;
+  border-bottom: 1px solid #eee;
+  transition: all 0.3s ease;
+  position: relative;
+  align-items: center;
+  background-color: #fff;
+  margin: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.news-item:hover {
+  background-color: #f9f9f9;
+  transform: translateX(5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #7B1436;
+}
+
+/* Date styling */
+.news-date {
+  min-width: 90px;
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-right: 15px;
+  padding: 4px 8px;
+  background-color: #f6f6f6;
+  border-radius: 4px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.news-title {
+  color: #333;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  flex: 1;
+  position: relative;
+  padding-right: 20px;
+}
+
+.news-title:hover {
+  color: #7B1436;
+}
+
+/* Add arrow indicator */
+.news-title::after {
+  content: '›';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4em;
+  color: #7B1436;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.news-item:hover .news-title::after {
+  opacity: 1;
+  transform: translate(3px, -50%);
+}
+
+/* New indicator dot */
+.news-item.new::before {
+  content: '';
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 8px;
+  height: 8px;
+  background-color: #ff4757;
+  border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Animation for the news ticker */
+@keyframes scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-80%); /* Adjust based on the content */
+  }
 }
 
 /* Tablet Styles */
@@ -105,7 +425,7 @@
   .hero h1 {
     font-size: 3.5rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.3rem;
   }
@@ -117,24 +437,82 @@
     height: 60vh;
     padding-top: 70px;
   }
-  
+
   .hero h1 {
     font-size: 2.8rem;
     margin-bottom: 1rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .hero-buttons {
     margin-top: 1.5rem;
   }
-  
+
   .hero-buttons .btn {
     padding: 10px 25px;
     font-size: 0.9rem;
+  }
+
+  .slider-nav {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .slider-dots {
+    bottom: 15px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .news-scroll-container {
+    height: 200px;
+  }
+
+  .news-item {
+    padding: 12px 20px;
+    margin: 6px 10px;
+  }
+
+  .news-date {
+    min-width: 80px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Desktop and Larger Tablet Layout */
+@media (min-width: 768px) {
+  .hero-container {
+    flex-direction: row;
+    height: 70vh;
+  }
+
+  .hero {
+    width: 65%;
+    height: 100%;
+    margin: 0;
+  }
+
+  .news-container {
+    width: 35%;
+    height: 100%;
+    border-top: none;
+    border-left: 1px solid #eee;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .news-scroll-container {
+    height: calc(100% - 60px); /* Adjusted for new header height */
+    flex: 1;
   }
 }
 
@@ -143,27 +521,59 @@
   .hero {
     height: 55vh;
   }
-  
+
   .hero h1 {
     font-size: 2.2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 1rem;
     max-width: 90%;
   }
-  
+
   .hero-content {
     padding: 1.5rem;
   }
-  
+
   .hero-buttons {
     gap: 0.8rem;
   }
-  
+
   .hero-buttons .btn {
     padding: 8px 20px;
     font-size: 0.85rem;
+  }
+
+  .slider-nav {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .news-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .news-header h2::before {
+    font-size: 1.2rem;
+  }
+
+  .news-item {
+    padding: 10px 15px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .news-date {
+    min-width: auto;
+    margin-bottom: 5px;
+    margin-right: 0;
+    align-self: flex-start;
+  }
+
+  .news-title {
+    font-size: 0.9rem;
+    margin-top: 5px;
   }
 }
 
@@ -172,18 +582,23 @@
   .hero h1 {
     font-size: 2rem;
   }
-  
+
   .hero-subtitle {
     font-size: 0.9rem;
   }
-  
+
   .hero-buttons {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .hero-buttons .btn {
     width: 100%;
     max-width: 200px;
+  }
+
+  .view-all-link {
+    font-size: 0.8rem;
+    padding: 4px 10px;
   }
 }
