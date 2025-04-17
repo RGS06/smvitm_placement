@@ -12,6 +12,7 @@
   "dependencies": {
     "aos": "^2.3.4",
     "chart.js": "^4.4.8",
+    "pocketbase": "^0.26.0",
     "react": "^19.0.0",
     "react-chartjs-2": "^5.3.0",
     "react-countup": "^6.5.3",

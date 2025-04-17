@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react';
+import pb from '../utils/pbClient'; // make sure this exports a PocketBase instance
 import './Admin.css';
 
 const NewsletterEditor = () => {
   const [newsletters, setNewsletters] = useState([]);
-  const [currentNewsletter, setCurrentNewsletter] = useState(null);
+  const [currentNewsletter, setCurrentNewsletter] = useState({
+    title: '',
+    link: '',
+    date: new Date().toLocaleDateString('en-GB')
+  });
   const [isEditing, setIsEditing] = useState(false);
+  const [editId, setEditId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -13,45 +19,38 @@ const NewsletterEditor = () => {
 
   const fetchNewsletters = async () => {
     try {
-      const response = await fetch('/NewsLetter/newsletter.json');
-      if (!response.ok) throw new Error('Failed to fetch newsletters');
-      const data = await response.json();
+      const data = await pb.collection('announcements').getFullList(200, {
+        sort: '-created' // newest first
+      });
       setNewsletters(data);
-      setIsLoading(false);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error fetching newsletters:', error);
+    } finally {
       setIsLoading(false);
     }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setCurrentNewsletter({
-      ...currentNewsletter,
-      [name]: value
-    });
+    setCurrentNewsletter({ ...currentNewsletter, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     try {
-      let updatedNewsletters;
-      if (isEditing) {
-        updatedNewsletters = newsletters.map(item => 
-          item.id === currentNewsletter.id ? currentNewsletter : item
+      if (isEditing && editId) {
+        // Update
+        const updated = await pb.collection('announcements').update(editId, currentNewsletter);
+        setNewsletters((prev) =>
+          prev.map((item) => (item.id === editId ? updated : item))
         );
       } else {
-        const newId = Math.max(...newsletters.map(item => item.id), 0) + 1;
-        updatedNewsletters = [...newsletters, { ...currentNewsletter, id: newId }];
+        // Create
+        const created = await pb.collection('announcements').create(currentNewsletter);
+        setNewsletters([created, ...newsletters]);
       }
-
-      // In a real app, you would send this to your backend API
-      // For this demo, we'll just update the state
-      setNewsletters(updatedNewsletters);
       resetForm();
-      
-      alert('Changes saved successfully! (In a real app, this would update the JSON file)');
     } catch (error) {
       console.error('Error saving newsletter:', error);
       alert('Failed to save changes');
@@ -59,31 +58,38 @@ const NewsletterEditor = () => {
   };
 
   const editNewsletter = (newsletter) => {
-    setCurrentNewsletter({ ...newsletter });
+    setCurrentNewsletter({
+      title: newsletter.title,
+      link: newsletter.link,
+      date: newsletter.date
+    });
+    setEditId(newsletter.id);
     setIsEditing(true);
   };
 
-  const deleteNewsletter = (id) => {
+  const deleteNewsletter = async (id) => {
     if (window.confirm('Are you sure you want to delete this newsletter?')) {
-      const updatedNewsletters = newsletters.filter(item => item.id !== id);
-      setNewsletters(updatedNewsletters);
-      // In a real app, you would also update the JSON file here
+      try {
+        await pb.collection('announcements').delete(id);
+        setNewsletters(newsletters.filter((item) => item.id !== id));
+      } catch (error) {
+        console.error('Error deleting:', error);
+        alert('Delete failed');
+      }
     }
   };
 
   const resetForm = () => {
     setCurrentNewsletter({
-      id: '',
       title: '',
-      content: '',
-      date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      link: '',
+      date: new Date().toLocaleDateString('en-GB')
     });
     setIsEditing(false);
+    setEditId(null);
   };
 
-  if (isLoading) {
-    return <div className="loading">Loading newsletters...</div>;
-  }
+  if (isLoading) return <div className="loading">Loading newsletters...</div>;
 
   return (
     <div className="newsletter-editor">
@@ -95,34 +101,34 @@ const NewsletterEditor = () => {
             <input
               type="text"
               name="title"
-              value={currentNewsletter?.title || ''}
+              value={currentNewsletter.title}
               onChange={handleInputChange}
               required
             />
           </div>
-          
+
           <div className="form-group">
-            <label>Content</label>
-            <textarea
-              name="content"
-              value={currentNewsletter?.content || ''}
+            <label>Link</label>
+            <input
+              type="text"
+              name="link"
+              value={currentNewsletter.link}
               onChange={handleInputChange}
               required
-              rows="5"
             />
           </div>
-          
+
           <div className="form-group">
             <label>Date</label>
             <input
               type="text"
               name="date"
-              value={currentNewsletter?.date || ''}
+              value={currentNewsletter.date}
               onChange={handleInputChange}
               required
             />
           </div>
-          
+
           <div className="form-actions">
             <button type="submit" className="btn btn-primary">
               {isEditing ? 'Update' : 'Save'}
@@ -133,28 +139,28 @@ const NewsletterEditor = () => {
           </div>
         </form>
       </div>
-      
+
       <div className="newsletter-list">
         <h2>Existing Newsletters</h2>
         {newsletters.length === 0 ? (
           <p>No newsletters found</p>
         ) : (
           <ul>
-            {newsletters.map(newsletter => (
+            {newsletters.map((newsletter) => (
               <li key={newsletter.id} className="newsletter-item">
                 <div className="newsletter-content">
                   <h3>{newsletter.title}</h3>
-                  <p>{newsletter.content.substring(0, 100)}...</p>
+                  <p>{newsletter.link}</p>
                   <small>{newsletter.date}</small>
                 </div>
                 <div className="newsletter-actions">
-                  <button 
+                  <button
                     onClick={() => editNewsletter(newsletter)}
                     className="btn btn-edit"
                   >
                     Edit
                   </button>
-                  <button 
+                  <button
                     onClick={() => deleteNewsletter(newsletter.id)}
                     className="btn btn-delete"
                   >

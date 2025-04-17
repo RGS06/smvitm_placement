@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import pb from '../utils/pbClient.js'; // Adjust the path as necessary
 import './Admin.css';
 
 const Login = () => {
@@ -14,13 +15,29 @@ const Login = () => {
     e.preventDefault();
     setError('');
     
-    // Simple validation (in production, use proper authentication)
-    if (credentials.username === 'admin' && credentials.password === 'admin123') {
+    try {
+      const authData = await pb.collection('users').authWithPassword(
+        credentials.username,
+        credentials.password
+      );
+
+      // Store auth token if needed
+      localStorage.setItem('pb_auth_token', pb.authStore.token);
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/dashboard');
-    } else {
-      setError('Invalid credentials');
+    } catch (err) {
+      console.error(err);
+      setError('Invalid credentials or server error');
     }
+
+
+    // Simple validation (in production, use proper authentication)
+    // if (credentials.username === 'admin' && credentials.password === 'admin123') {
+    //   localStorage.setItem('isAuthenticated', 'true');
+    //   navigate('/dashboard');
+    // } else {
+    //   setError('Invalid credentials');
+    // }
   };
 
   return (
@@ -31,9 +48,9 @@ const Login = () => {
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="username">Email</label>
             <input
-              type="text"
+              type="email"
               id="username"
               value={credentials.username}
               onChange={(e) => setCredentials({...credentials, username: e.target.value})}
