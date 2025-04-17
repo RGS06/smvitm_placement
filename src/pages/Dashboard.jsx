@@ -10,13 +10,13 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!localStorage.getItem('isAuthenticated')) {
-      navigate('/admin/login');
+      navigate('/admin');
     }
   }, [navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
-    navigate('/admin/login');
+    navigate('/admin');
   };
 
   return (

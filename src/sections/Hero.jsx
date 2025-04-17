@@ -1,5 +1,7 @@
 import './Hero.css';
 import { useEffect, useState } from 'react';
+import pb from '../utils/pbClient'; 
+// import { useNavigate } from 'react-router-dom'; // Uncomment if you need navigation
 import Image2025 from '../assets/2025.jpeg';
 import Infosys from '../assets/Infosys.png';
 import Kyndryl from '../assets/Kyndryl.png';
@@ -10,6 +12,10 @@ const Hero = () => {
   const [currentImage, setCurrentImage] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
+  
+  const [newsItems, setnewsItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
@@ -17,7 +23,7 @@ const Hero = () => {
 
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 5000); // Change every 5 seconds
+    }, 5000);
 
     window.addEventListener('resize', handleResize);
     return () => {
@@ -26,7 +32,29 @@ const Hero = () => {
     };
   }, []);
   
-  const newsItems = [
+  
+
+    useEffect(() => {
+      fetchNewsletters();
+    }, []);
+
+    const fetchNewsletters = async () => {
+      try {
+        const data = await pb.collection('announcements').getFullList(200, {
+          sort: '-created'
+        });
+        console.log("Fetched data:", data);  // <-- Debug log
+        setnewsItems(data);
+        setIsLoading(false); 
+      } catch (error) {
+        console.error('Error fetching newsletters:', error);
+      } 
+    };
+    
+
+  
+
+  const newsItemsz = [
     {
       id: 1,
       title: 'Campus placement drive by Accenture on 15th May 2023',

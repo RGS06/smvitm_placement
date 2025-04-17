@@ -9,7 +9,6 @@ import Gallery from './sections/Gallery';
 import Testimonials from './sections/Testimonials';
 import Team from './sections/Team';
 import Footer from './components/Footer';
-import NewsLetters from './sections/NewsLetter/NewsLetters';
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <NewsLetters/>
         <About />
         <PlacementStats />
         <Recruiters />
