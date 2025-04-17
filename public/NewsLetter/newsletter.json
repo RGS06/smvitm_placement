@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Placement Drive Success",
+    "content": "Our recent placement drive saw 85% placement rate with top companies like Infosys and TCS participating.",
+    "date": "June 15, 2023"
+  },
+  {
+    "id": 2,
+    "title": "New Internship Opportunities",
+    "content": "Microsoft, Amazon, and IBM are offering summer internships for CS/IT students. Apply by July 5.",
+    "date": "June 1, 2023"
+  },
+  {
+    "id": 3,
+    "title": "Resume Workshop",
+    "content": "Join our resume building workshop on May 20 to learn how to create impactful resumes.",
+    "date": "May 10, 2023"
+  }
+]
