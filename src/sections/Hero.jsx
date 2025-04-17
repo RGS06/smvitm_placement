@@ -46,30 +46,35 @@ const Hero = () => {
       title: 'Workshop on Resume Building on 20th April 2023',
       date: '10/04/2023',
       link: '#',
+      isNew: false,
     },
     {
       id: 4,
       title: 'TCS NQT registrations open for 2023 batch',
       date: '05/04/2023',
       link: '#',
+      isNew: false,
     },
     {
       id: 5,
       title: 'Placement orientation program for pre-final year students',
       date: '01/04/2023',
       link: '#',
+      isNew: false,
     },
     {
       id: 6,
       title: 'Internship opportunities at Amazon for B.Tech students',
       date: '28/03/2023',
       link: '#',
+      isNew: false,
     },
     {
       id: 7,
       title: 'Technical symposium registration now open',
       date: '25/03/2023',
       link: '#',
+      isNew: false,
     },
   ];
 
@@ -138,14 +143,14 @@ const Hero = () => {
         </div>
         <div className="news-scroll-container">
           <div className="news-ticker">
-            {newsItems.map((item) => (
+            {newsItems.map((item, index) => (
               <div key={item.id} className={`news-item ${item.isNew ? 'new' : ''}`}>
                 <span className="news-date">{item.date}</span>
                 <a href={item.link} className="news-title">{item.title}</a>
               </div>
             ))}
             {/* Duplicate first few items to create seamless loop */}
-            {newsItems.slice(0, 2).map((item) => (
+            {newsItems.slice(0, 2).map((item, index) => (
               <div key={`duplicate-${item.id}`} className={`news-item ${item.isNew ? 'new' : ''}`}>
                 <span className="news-date">{item.date}</span>
                 <a href={item.link} className="news-title">{item.title}</a>
