@@ -1,266 +1,77 @@
-:root {
-  --primary-color: #7B1436;
-  --secondary-color: #C59048;
-  --text-light: #fff;
-  --text-gray: #aaa;
-  --bg-dark: #1a1a1a;
-  --transition: all 0.3s ease;
-}
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaInstagram, FaFacebook, FaTwitter, FaYoutube, FaGraduationCap } from 'react-icons/fa';
+import './Footer.css';
 
-/* Base Styles */
-.footer {
-  background-color: var(--bg-dark);
-  color: var(--text-light);
-  padding: 4rem 0 2rem;
-  position: relative;
-}
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
+  return (
+    <footer className="footer" id="contact">
+      <div className="container">
+        <div className="footer-content">
+          <div className="footer-logo">
+            <FaGraduationCap className="footer-logo-icon" />
+            <div className="footer-title">
+              <h3>Training & Placement Cell</h3>
+              <p>Your Gateway to a Successful Career</p>
+            </div>
+          </div>
 
-.footer-content {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
+          <div className="footer-contact">
+            <h3>Contact Us</h3>
+            <ul>
+              <li>
+                <FaEnvelope className="footer-icon" />
+                <span>placement@sode-edu.in</span>
+              </li>
+              <li>
+                <FaPhone className="footer-icon" />
+                <span>+91 9742406206</span>
+              </li>
+              <li>
+                <FaMapMarkerAlt className="footer-icon" />
+                <span>Training & Placement Office, College Campus, Main Building</span>
+              </li>
+            </ul>
+          </div>
 
-.footer-logo {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.5rem;
-}
+          <div className="footer-links">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#stats">Placement Statistics</a></li>
+              <li><a href="#recruiters">Our Recruiters</a></li>
+              <li><a href="#reports">Reports</a></li>
+              <li><a href="#team">Our Team</a></li>
+              <li><a href="#">Download Brochure</a></li>
+            </ul>
+          </div>
 
-.footer-logo-icon {
-  font-size: 2.5rem;
-  color: var(--secondary-color);
-  margin-right: 1rem;
-  flex-shrink: 0;
-}
+          <div className="footer-social">
+            <h3>Connect With Us</h3>
+            <div className="social-icons">
+              <a href="https://www.linkedin.com/company/shri-madhwa-vadiraja-institute-of-technology-and-management/" className="social-icon" aria-label="LinkedIn">
+                <FaLinkedin />
+              </a>
+              <a href="https://www.instagram.com/smvitm.sode/" className="social-icon" aria-label="Instagram">
+                <FaInstagram />
+              </a>
+              <a href="https://www.facebook.com/officialsmvitm" className="social-icon" aria-label="Facebook">
+                <FaFacebook />
+              </a>
+              <a href="https://www.youtube.com/SMVITMBANTAKAL" className="social-icon" aria-label="YouTube">
+                <FaYoutube />
+              </a>
+            </div>
+          </div>
+        </div>
 
-.footer-title h3 {
-  color: var(--text-light);
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
-}
+        <div className="footer-bottom">
+          <p>&copy; {currentYear} Training & Placement Cell. All Rights Reserved.</p>
+          <p className="footer-credit">Designed with ❤️ by Placement Cell Team</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
-.footer-title p {
-  color: var(--secondary-color);
-  font-style: italic;
-  font-size: 0.95rem;
-}
-
-.footer h3 {
-  color: var(--text-light);
-  margin-bottom: 1.5rem;
-  font-size: 1.3rem;
-  position: relative;
-  padding-bottom: 0.5rem;
-}
-
-.footer h3::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50px;
-  height: 3px;
-  background-color: var(--secondary-color);
-}
-
-.footer-contact ul,
-.footer-links ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-contact li {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 1rem;
-}
-
-.footer-icon {
-  margin-right: 10px;
-  font-size: 1.2rem;
-  color: var(--secondary-color);
-  margin-top: 3px;
-  flex-shrink: 0;
-}
-
-.footer-contact span {
-  line-height: 1.6;
-}
-
-.footer-links li {
-  margin-bottom: 0.8rem;
-}
-
-.footer-links a {
-  color: #ccc;
-  text-decoration: none;
-  transition: var(--transition);
-  display: inline-block;
-  padding: 0.2rem 0;
-}
-
-.footer-links a:hover {
-  color: var(--secondary-color);
-  transform: translateX(5px);
-}
-
-.social-icons {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--text-light);
-  font-size: 1.2rem;
-  transition: var(--transition);
-}
-
-.social-icon:hover {
-  background-color: var(--primary-color);
-  transform: translateY(-3px);
-}
-
-.footer-bottom {
-  padding-top: 2rem;
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-bottom p {
-  color: var(--text-gray);
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-}
-
-.footer-credit {
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-/* Tablet Styles */
-@media (max-width: 1024px) {
-  .footer-content {
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem 2rem;
-  }
-  
-  .footer-logo {
-    grid-column: 1 / -1;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-  }
-  
-  .footer-logo-icon {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-}
-
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .footer {
-    padding: 3rem 0 2rem;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-  
-  .footer h3 {
-    text-align: center;
-    font-size: 1.4rem;
-  }
-  
-  .footer h3::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .footer-contact li {
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-icon {
-    margin-right: 0;
-    margin-bottom: 0.5rem;
-  }
-  
-  .footer-links ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    text-align: center;
-  }
-  
-  .footer-links a:hover {
-    transform: none;
-  }
-  
-  .social-icons {
-    justify-content: center;
-  }
-}
-
-/* Small Mobile Styles */
-@media (max-width: 480px) {
-  .footer-links ul {
-    grid-template-columns: 1fr;
-  }
-  
-  .footer-title h3 {
-    font-size: 1.3rem;
-  }
-  
-  .footer-title p {
-    font-size: 0.9rem;
-  }
-  
-  .footer-contact span {
-    font-size: 0.95rem;
-  }
-  
-  .social-icon {
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
-  }
-}
-
-/* Very Small Mobile Styles */
-@media (max-width: 360px) {
-  .footer {
-    padding: 2.5rem 0 1.5rem;
-  }
-  
-  .footer-content {
-    gap: 2rem;
-  }
-  
-  .footer-bottom p {
-    font-size: 0.85rem;
-  }
-}
+export default Footer;
