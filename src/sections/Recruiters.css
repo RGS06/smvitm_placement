@@ -45,21 +45,19 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  overflow: hidden;
 }
 
-/* 🔥 New hover and polish effects */
 .recruiter-logo img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 90%;
+  max-height: 90%;
   object-fit: contain;
-  filter: grayscale(100%);
-  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 8px;
 }
 
 .recruiter-logo:hover img {
   transform: scale(1.05);
-  filter: grayscale(0%);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -67,19 +65,18 @@
   z-index: 3;
 }
 
-/* 🛑 Pause animation on hover */
+/* Pause animation when user hovers on marquee */
 .marquee-container:hover .recruiter-logo {
   animation-play-state: paused;
 }
 
-/* 🔁 Keyframes for auto sliding */
 @keyframes autoRunSlider {
   to {
     left: 120%;
   }
 }
 
-/* 📱 Responsive adjustments */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .recruiter-logo {
     width: 120px;
