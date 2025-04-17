@@ -22,9 +22,11 @@
 
 .marquee {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: calc(var(--quantity) * 200px);
   position: relative;
-  width: max-content;
+  gap: 1rem;
 }
 
 .recruiter-logo {
@@ -43,23 +45,18 @@
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  overflow: hidden;
+  
 }
 
 .recruiter-logo img {
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 8px;
-}
-
-.recruiter-logo:hover img {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .recruiter-logo:hover {
+  transform: scale(1.1);
+  filter: grayscale(0);
   z-index: 3;
 }
 
