@@ -22,11 +22,9 @@
 
 .marquee {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: calc(var(--quantity) * 200px);
-  position: relative;
   gap: 1rem;
+  position: relative;
+  width: max-content;
 }
 
 .recruiter-logo {
@@ -65,7 +63,6 @@
   z-index: 3;
 }
 
-/* Pause animation when user hovers on marquee */
 .marquee-container:hover .recruiter-logo {
   animation-play-state: paused;
 }
