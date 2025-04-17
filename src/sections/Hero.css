@@ -7,6 +7,10 @@
 }
 
 /* Hero Banner Styles */
+/* Images will be displayed in full without cropping
+ * Recommended to use consistent image sizes for best results
+ * For best fit: use landscape images with 16:9 aspect ratio (e.g., 1920x1080px)
+ */
 .hero {
   position: relative;
   height: 70vh; /* Default height for desktop */
@@ -16,8 +20,8 @@
   justify-content: center;
   color: #fff;
   overflow: hidden;
-  padding-top: 80px; /* For fixed header */
-  background-color: #000;
+  padding-top: 0;
+  background-color: #222; /* Darker background to make contained images look better */
 }
 
 /* Slides container */
@@ -44,13 +48,21 @@
   justify-content: center;
   align-items: center;
   background-color: #222; /* Dark background for better contrast */
+  overflow: hidden; /* Ensure no overflow from images */
+  position: relative;
+  padding: 20px; /* Add padding to prevent images from touching edges */
 }
 
+/* Image styling to prevent cropping */
 .hero-slide img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain; /* This ensures the image is fully visible */
+  width: auto; /* Let width adjust automatically based on height */
+  height: auto; /* Let height adjust automatically based on width */
+  object-fit: contain; /* This ensures the full image is visible without cropping */
+  object-position: center; /* Center the image */
   display: block;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Optional: add shadow for better appearance */
 }
 
 .hero-overlay {
@@ -59,7 +71,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
   z-index: 1;
   pointer-events: none; /* Ensures clicks go through to the slider */
 }
@@ -321,7 +333,7 @@
   animation-play-state: paused;
 }
 
-/* Enhanced news items */
+/* ======= ENHANCED NEWS ITEMS WITH COLORED BORDERS ======= */
 .news-item {
   display: flex;
   padding: 14px 24px;
@@ -333,16 +345,27 @@
   margin: 8px 12px;
   border-radius: 6px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid transparent;
+  overflow: hidden;
 }
 
+/* Different colored borders for different news items */
+.news-item:nth-child(6n+1) { border-left-color: #7B1436; } /* Maroon */
+.news-item:nth-child(6n+2) { border-left-color: #2c82e0; } /* Blue */
+.news-item:nth-child(6n+3) { border-left-color: #3ab795; } /* Teal */
+.news-item:nth-child(6n+4) { border-left-color: #e67e22; } /* Orange */
+.news-item:nth-child(6n+5) { border-left-color: #9b59b6; } /* Purple */
+.news-item:nth-child(6n+6) { border-left-color: #e74c3c; } /* Red */
+
+/* Hover effects */
 .news-item:hover {
   background-color: #f9f9f9;
   transform: translateX(5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-  border-left: 4px solid #7B1436;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-left-width: 6px;
 }
 
-/* Date styling */
+/* Date styling with matching colors */
 .news-date {
   min-width: 90px;
   color: #666;
@@ -350,11 +373,49 @@
   font-weight: 600;
   margin-right: 15px;
   padding: 4px 8px;
-  background-color: #f6f6f6;
   border-radius: 4px;
   text-align: center;
   letter-spacing: 0.5px;
-  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+/* Matching date backgrounds */
+.news-item:nth-child(6n+1) .news-date { 
+  background-color: rgba(123, 20, 54, 0.1);
+  color: #7B1436;
+}
+.news-item:nth-child(6n+2) .news-date { 
+  background-color: rgba(44, 130, 224, 0.1);
+  color: #2c82e0;
+}
+.news-item:nth-child(6n+3) .news-date { 
+  background-color: rgba(58, 183, 149, 0.1);
+  color: #3ab795;
+}
+.news-item:nth-child(6n+4) .news-date { 
+  background-color: rgba(230, 126, 34, 0.1);
+  color: #e67e22;
+}
+.news-item:nth-child(6n+5) .news-date { 
+  background-color: rgba(155, 89, 182, 0.1);
+  color: #9b59b6;
+}
+.news-item:nth-child(6n+6) .news-date { 
+  background-color: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+}
+
+/* Add subtle gradient to news items */
+.news-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 100%);
+  z-index: 0;
 }
 
 /* Title styling */
@@ -367,10 +428,16 @@
   flex: 1;
   position: relative;
   padding-right: 20px;
+  transition: all 0.3s ease;
 }
 
+/* Title hover effects */
 .news-title:hover {
   color: #7B1436;
+  background: linear-gradient(90deg, currentColor 0%, currentColor 100%);
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
 }
 
 /* Add arrow indicator */
@@ -391,11 +458,11 @@
   transform: translate(3px, -50%);
 }
 
-/* New indicator dot */
+/* Keep original red dot styling for new items */
 .news-item.new::before {
   content: '';
   position: absolute;
-  right: 15px;
+  left: 15px;
   top: 15px;
   width: 8px;
   height: 8px;
@@ -403,6 +470,14 @@
   border-radius: 50%;
   animation: blink 1.5s infinite;
 }
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+
 
 @keyframes blink {
   0% { opacity: 1; }
