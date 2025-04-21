@@ -7,27 +7,25 @@ import './Testimonials.css';
 const testimonials = [
   {
     id: 1,
-    name: 'Aditya Malhotra',
-    position: 'Software Engineer at Google',
-    quote:
-      'The Training and Placement Cell provided exceptional support throughout my placement journey. The mock interviews and resume building workshops were particularly helpful in preparing me for the recruitment process at Google.',
-    image: 'https://randomuser.me/api/portraits/men/32.jpg',
+    name: 'Mr. Claton Robert D’Souza',
+    position: 'Infrastructure-Specialist at Kyndryl',
+    quote:'My four years in CSE were a transformative journey, blending rigorous academics, hands-on projects, and invaluable faculty guidance that sharpened my technical and problem-solving skills. The departments industry-aligned approach and placement support helped me secure a rewarding career. I’m deeply grateful for the knowledge, growth, and opportunities that have set me on the path to success in tech',
+    image: '/claton.jpg',
   },
   {
     id: 2,
-    name: 'Meera Patel',
-    position: 'UX Designer at Microsoft',
+    name: 'Mr. Prathviraj',
+    position: 'Software Developer at Kambala Solutions',
     quote:
-      'I am grateful to the placement cell for helping me secure my dream role at Microsoft. The industry connections and personalized guidance from the TPO were instrumental in my success.',
-    image: 'https://randomuser.me/api/portraits/women/44.jpg',
+      'SMVITM offered a dynamic blend of academics, hands-on projects, and exposure to emerging tech, complemented by hackathons and faculty mentorship that honed my technical and leadership skills. Now at Kambala Solutions, I leverage this foundation to build innovative software solutions, embracing the transformative journey from campus to the ever-evolving tech industry.',
+    image: '/prathviraj.jpg',
   },
   {
     id: 3,
-    name: 'Rajiv Khanna',
-    position: 'Product Manager at Amazon',
-    quote:
-      "The placement team's dedication and the quality of training programs they organized gave me a competitive edge during interviews. They truly go above and beyond to ensure students are well-prepared for the corporate world.",
-    image: 'https://randomuser.me/api/portraits/men/62.jpg',
+    name: 'Chaitanya Anant Nilekani',
+    position: 'KarMic Design Private Limited',
+    quote:'My time at SMVITM transformed me through hands-on IoT/electronics projects, expert faculty guidance, and collaborative learning, building both technical skills and confidence. Now at Karmic Design Pvt Ltd, I am applying this strong foundation to real-world challenges. Grateful for the knowledge growth and lifelong connections that continue to shape my career',
+    image: '/chaitanya.jpeg',
   },
 ];
 
