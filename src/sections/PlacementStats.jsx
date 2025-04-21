@@ -36,14 +36,14 @@ const PlacementStats = () => {
     {
       id: 1,
       title: 'Highest Package',
-      value: 9,
+      value: 9.9,
       suffix: 'LPA',
       icon: '💰',
     },
     {
       id: 2,
       title: 'Average Package',
-      value: 7,
+      value: 6,
       suffix: 'LPA',
       icon: '📈',
     },
@@ -57,7 +57,7 @@ const PlacementStats = () => {
     {
       id: 4,
       title: 'Recruiting Companies',
-      value: 90,
+      value: 170,
       suffix: '+',
       icon: '🏢',
     }
