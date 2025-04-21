@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import pb from '../utils/pbClient.js'; // Adjust the path as necessary
 import './Admin.css';
 
 const Login = () => {
@@ -14,31 +13,37 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    
+  
     try {
-      const authData = await pb.collection('users').authWithPassword(
-        credentials.username,
-        credentials.password
-      );
-
-      // Store auth token if needed
-      localStorage.setItem('pb_auth_token', pb.authStore.token);
-      localStorage.setItem('isAuthenticated', 'true');
-      navigate('/dashboard');
+      const res = await fetch('http://localhost:3000/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: credentials.username,
+          password: credentials.password
+        }),
+        credentials: 'include',
+      });
+  
+      const data = await res.json();
+  
+      if (res.ok) {
+        localStorage.setItem('isAuthenticated', 'true');
+        localStorage.setItem('authToken', data.user); // use 'user' not 'token'
+  
+        // console.log('Login successful:', data);
+        navigate('/dashboard');
+      } else {
+        setError(data.message || 'Invalid credentials');
+      }
     } catch (err) {
       console.error(err);
-      setError('Invalid credentials or server error');
+      setError('Error connecting to the server');
     }
-
-
-    // Simple validation (in production, use proper authentication)
-    // if (credentials.username === 'admin' && credentials.password === 'admin123') {
-    //   localStorage.setItem('isAuthenticated', 'true');
-    //   navigate('/dashboard');
-    // } else {
-    //   setError('Invalid credentials');
-    // }
   };
+  
 
   return (
     <div className="admin-login-container">
@@ -53,7 +58,7 @@ const Login = () => {
               type="email"
               id="username"
               value={credentials.username}
-              onChange={(e) => setCredentials({...credentials, username: e.target.value})}
+              onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
               required
             />
           </div>
@@ -64,7 +69,7 @@ const Login = () => {
               type="password"
               id="password"
               value={credentials.password}
-              onChange={(e) => setCredentials({...credentials, password: e.target.value})}
+              onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
               required
             />
           </div>

@@ -1,1 +1,6 @@
 /node_modules
+/dist
+
+/smvitm_placement\backend\mongo-crud-next/node_modules
+/smvitm_placement\backend\mongo-crud-next/.env
+/smvitm_placement\backend\mongo-crud-next/.env.local

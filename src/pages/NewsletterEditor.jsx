@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import pb from '../utils/pbClient'; // make sure this exports a PocketBase instance
 import './Admin.css';
 
 const NewsletterEditor = () => {
@@ -7,7 +6,7 @@ const NewsletterEditor = () => {
   const [currentNewsletter, setCurrentNewsletter] = useState({
     title: '',
     link: '',
-    date: new Date().toLocaleDateString('en-GB')
+    date: new Date().toLocaleDateString('en-GB'),
   });
   const [isEditing, setIsEditing] = useState(false);
   const [editId, setEditId] = useState(null);
@@ -19,9 +18,8 @@ const NewsletterEditor = () => {
 
   const fetchNewsletters = async () => {
     try {
-      const data = await pb.collection('announcements').getFullList(200, {
-        sort: '-created' // newest first
-      });
+      const res = await fetch('http://localhost:3000/api/posts');
+      const data = await res.json();
       setNewsletters(data);
     } catch (error) {
       console.error('Error fetching newsletters:', error);
@@ -37,23 +35,23 @@ const NewsletterEditor = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      if (isEditing && editId) {
-        // Update
-        const updated = await pb.collection('announcements').update(editId, currentNewsletter);
-        setNewsletters((prev) =>
-          prev.map((item) => (item.id === editId ? updated : item))
-        );
-      } else {
-        // Create
-        const created = await pb.collection('announcements').create(currentNewsletter);
-        setNewsletters([created, ...newsletters]);
-      }
+      const res = await fetch(
+        isEditing ? `http://localhost:3000/api/posts/${editId}` : 'http://localhost:3000/api/posts',
+        {
+          method: isEditing ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(currentNewsletter),
+        }
+      );
+
+      if (!res.ok) throw new Error('Failed to save');
+
+      await fetchNewsletters();
       resetForm();
     } catch (error) {
-      console.error('Error saving newsletter:', error);
-      alert('Failed to save changes');
+      alert('Failed to save newsletter');
+      console.error(error);
     }
   };
 
@@ -61,20 +59,21 @@ const NewsletterEditor = () => {
     setCurrentNewsletter({
       title: newsletter.title,
       link: newsletter.link,
-      date: newsletter.date
+      date: newsletter.date,
     });
-    setEditId(newsletter.id);
+    setEditId(newsletter._id);
     setIsEditing(true);
   };
 
   const deleteNewsletter = async (id) => {
     if (window.confirm('Are you sure you want to delete this newsletter?')) {
       try {
-        await pb.collection('announcements').delete(id);
-        setNewsletters(newsletters.filter((item) => item.id !== id));
+        const res = await fetch(`http://localhost:3000/api/posts/${id}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error('Failed to delete');
+        fetchNewsletters();
       } catch (error) {
-        console.error('Error deleting:', error);
-        alert('Delete failed');
+        alert('Failed to delete newsletter');
+        console.error(error);
       }
     }
   };
@@ -83,7 +82,7 @@ const NewsletterEditor = () => {
     setCurrentNewsletter({
       title: '',
       link: '',
-      date: new Date().toLocaleDateString('en-GB')
+      date: new Date().toLocaleDateString('en-GB'),
     });
     setIsEditing(false);
     setEditId(null);
@@ -147,7 +146,7 @@ const NewsletterEditor = () => {
         ) : (
           <ul>
             {newsletters.map((newsletter) => (
-              <li key={newsletter.id} className="newsletter-item">
+              <li key={newsletter._id} className="newsletter-item">
                 <div className="newsletter-content">
                   <h3>{newsletter.title}</h3>
                   <p>{newsletter.link}</p>
@@ -161,7 +160,7 @@ const NewsletterEditor = () => {
                     Edit
                   </button>
                   <button
-                    onClick={() => deleteNewsletter(newsletter.id)}
+                    onClick={() => deleteNewsletter(newsletter._id)}
                     className="btn btn-delete"
                   >
                     Delete
