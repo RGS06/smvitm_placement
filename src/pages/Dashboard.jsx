@@ -16,6 +16,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('authToken');
     navigate('/admin');
   };
 
@@ -33,16 +34,19 @@ const Dashboard = () => {
         >
           Newsletter Content
         </button>
-        <button 
+        {/* <button 
           className={`tab-btn ${activeTab === 'images' ? 'active' : ''}`}
           onClick={() => setActiveTab('images')}
         >
           Image Management
-        </button>
+        </button> */}
       </nav>
       
-      <div className="admin-content">
+      {/* <div className="admin-content">
         {activeTab === 'newsletters' ? <NewsletterEditor /> : <ImageManager />}
+      </div> */}
+      <div className="admin-content">
+        {activeTab === 'newsletters' ? <NewsletterEditor /> :(<></>)}
       </div>
     </div>
   );

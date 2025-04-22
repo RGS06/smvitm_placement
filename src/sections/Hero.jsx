@@ -40,10 +40,9 @@ const Hero = () => {
 
     const fetchNewsletters = async () => {
       try {
-        const data = await pb.collection('announcements').getFullList(200, {
-          sort: '-created'
-        });
-        console.log("Fetched data:", data);  // <-- Debug log
+        const res = await fetch('http://localhost:3000/api/posts'); // Or your deployed API endpoint
+        const data = await res.json();
+        console.log("Fetched backend news:", data);
         setnewsItems(data);
         setIsLoading(false); 
       } catch (error) {
